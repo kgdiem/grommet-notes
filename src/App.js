@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Box, Grid, Grommet } from 'grommet';
 import { NoteArea, NoteList } from './components';
 
@@ -11,16 +11,18 @@ const App = ({notes, note}) => (
       ]}
       rows={['full']}
       columns={['1/4', '3/4']}
+      fill={true}
       gap="small"
       justify="center"
       style={{
-        height: '100vh'
+        height: '100vh',
+        width: '98.8vw'
       }}
     >
-      <Box gridArea="list">
+      <Box gridArea="list" fill={true}>
         <NoteList notes={notes}/>
       </Box>
-      <Box gridArea="note">
+      <Box gridArea="note" fill={true}>
         {
           <NoteArea note={note}/>
         }
