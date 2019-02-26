@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import * as actions from '../../actions';
 import { NoteArea, NoteList } from './';
 
-const NoteContainerComponent = ({notes, note, activateNote, editNote}) => (
+const NoteContainerComponent = ({notes, note, activateNote, deleteNote, editNote}) => (
     <Grid
         areas={[
             { name: 'list', start: [0, 0], end: [1, 0] },
@@ -22,7 +22,7 @@ const NoteContainerComponent = ({notes, note, activateNote, editNote}) => (
         }}
     >
         <Box gridArea="list" fill={true}>
-            <NoteList notes={notes} onNoteClick={activateNote}/>
+            <NoteList notes={notes} onNoteClick={activateNote} onDeleteNoteClick={deleteNote}/>
         </Box>
         <Box gridArea="note" fill={true}>
             <NoteArea note={note} onChange={note && editNote}/>
@@ -38,6 +38,9 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
     activateNote: index => {
         dispatch({type: actions.ACTIVATE_NOTE, payload: {noteIndex: index}})
+    },
+    deleteNote: index => {
+        dispatch({type: actions.DELETE_NOTE, payload: {noteIndex: index}})
     },
     editNote: note => {
         dispatch({type: actions.EDIT_REQUESTED, payload: {note}})

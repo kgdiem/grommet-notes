@@ -22,6 +22,24 @@ function notes(state = initialState, action) {
         case actions.ACTIVATE_NOTE: {
             return {...state, activeNoteIndex: action.payload.noteIndex}
         }
+        case actions.DELETE_NOTE: {
+            const activeNoteIndex = state.activeNoteIndex
+            const notes = [...state.notes]
+            
+            const deleteIndex = action.payload.noteIndex
+            
+            notes.splice(deleteIndex, 1)
+
+            const nextState = {...state, notes}
+
+            if(deleteIndex === activeNoteIndex) {
+                nextState.activeNoteIndex = 0
+            } else if(deleteIndex < activeNoteIndex) {
+                nextState.activeNoteIndex--
+            }
+
+            return nextState
+        }
         case actions.EDIT_REQUESTED: {
             const notes = [...state.notes]
 
