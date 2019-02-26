@@ -1,8 +1,9 @@
 import React from 'react';
 import { Box, Grid } from 'grommet';
 import { NoteArea, NoteList } from './';
+import { connect } from 'react-redux';
 
-export default ({notes, note}) => (
+const NoteContainer = ({notes, note}) => (
     <Grid
         areas={[
             { name: 'list', start: [0, 0], end: [1, 0] },
@@ -26,3 +27,12 @@ export default ({notes, note}) => (
         </Box>
     </Grid>
 )
+
+function mapStateToProps(state) {
+    return {
+        notes: state.notes,
+        note: state.notes[state.activeNoteIndex]
+    }
+}
+
+export default connect(mapStateToProps)(NoteContainer)
