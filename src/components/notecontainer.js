@@ -1,9 +1,11 @@
 import React from 'react';
 import { Box, Grid } from 'grommet';
-import { NoteArea, NoteList } from './';
 import { connect } from 'react-redux';
 
-const NoteContainer = ({notes, note}) => (
+import * as actions from '../actions';
+import { NoteArea, NoteList } from './';
+
+const NoteContainer = ({notes, note, activateNote, editNote}) => (
     <Grid
         areas={[
             { name: 'list', start: [0, 0], end: [1, 0] },
@@ -20,19 +22,26 @@ const NoteContainer = ({notes, note}) => (
         }}
     >
         <Box gridArea="list" fill={true}>
-            <NoteList notes={notes}/>
+            <NoteList notes={notes} onNoteClick={activateNote}/>
         </Box>
         <Box gridArea="note" fill={true}>
-            <NoteArea note={note}/>
+            <NoteArea note={note} onChange={note && editNote}/>
         </Box>
     </Grid>
 )
 
-function mapStateToProps(state) {
-    return {
-        notes: state.notes,
-        note: state.notes[state.activeNoteIndex]
-    }
-}
+const mapStateToProps = state => ({
+    notes: state.notes,
+    note: state.notes[state.activeNoteIndex]
+})
 
-export default connect(mapStateToProps)(NoteContainer)
+const mapDispatchToProps = dispatch => ({
+    activateNote: index => {
+        dispatch({type: actions.ACTIVATE_NOTE, payload: {noteIndex: index}})
+    },
+    editNote: note => {
+        dispatch({type: actions.EDIT_REQUESTED, payload: {note}})
+    }
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(NoteContainer)

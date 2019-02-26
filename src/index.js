@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import createSagaMiddleware from 'redux-saga';
-import { applyMiddleware, createStore } from 'redux';
+import { applyMiddleware, createStore, compose } from 'redux';
 import { Provider } from 'react-redux';
 
 import App from './App';
@@ -11,7 +11,11 @@ import { noteSaga } from './sagas';
 
 const sagaMiddleware = createSagaMiddleware();
 
-const store = createStore(notes, applyMiddleware(sagaMiddleware));
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+const store = createStore(notes, composeEnhancers(
+    applyMiddleware(sagaMiddleware)
+));
 
 sagaMiddleware.run(noteSaga)
 

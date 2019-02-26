@@ -4,7 +4,7 @@ import * as actions from '../actions';
 
 function* editRequested() {
     const notes = yield select(state => state.notes);
-
+    
     localStorage.setItem('notes', JSON.stringify(notes));
 }
 

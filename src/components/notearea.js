@@ -1,8 +1,8 @@
 import React from 'react';
 import { Box, TextArea } from 'grommet';
 
-export default ({note}) => (
+export default ({note, onChange}) => (
     <Box fill={true} background="light-1">
-        <TextArea fill={true} value={note && note.content}/>
+        <TextArea fill={true} value={note && note.content} onChange={e => onChange(e.target.value)}/>
     </Box>
 )

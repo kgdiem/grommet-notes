@@ -3,11 +3,11 @@ import * as actions from '../actions';
 let loadedNotes = localStorage.getItem('notes');
 
 if(loadedNotes)
-    loadedNotes = JSON.parse(notes);
+    loadedNotes = JSON.parse(loadedNotes);
 
 export const initialState = {
-    notes: loadedNotes || [],
-    activeNoteIndex: null
+    notes: loadedNotes || [{content: 'test', id: 1}],
+    activeNoteIndex: 0
 }
 
 function notes(state = initialState, action) {
@@ -18,7 +18,7 @@ function notes(state = initialState, action) {
         case actions.EDIT_REQUESTED:
             const notes = [...state.notes]
 
-            notes[state.activeNoteIndex] = action.payload.note
+            notes[state.activeNoteIndex].content = action.payload.note
             
             return {...state, notes: notes}
         
