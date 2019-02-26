@@ -1,3 +1,1 @@
-import notesSaga from './notes'
-
-export const noteSaga = notesSaga
+export * from './notes'

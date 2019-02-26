@@ -1,4 +1,4 @@
-import { select, takeLatest } from 'redux-saga/effects';
+import { all, select, takeLatest, takeEvery} from 'redux-saga/effects';
 
 import * as actions from '../actions';
 
@@ -8,8 +8,12 @@ function* editRequested() {
     localStorage.setItem('notes', JSON.stringify(notes));
 }
 
-function* notesSaga() {
-    yield takeLatest(actions.EDIT_REQUESTED, editRequested);
-}
+export const noteSagas = [
+    takeLatest(actions.EDIT_REQUESTED, editRequested),
+    takeEvery(actions.DELETE_NOTE, editRequested),
+    takeEvery(actions.ADD_NOTE, editRequested)
+]
 
-export default notesSaga;
+export function* noteSaga() {
+    yield all(noteSagas)
+}
