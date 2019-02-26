@@ -1,8 +1,8 @@
 import React from 'react';
-import { Anchor, Box, Grid, InfiniteScroll, Paragraph } from 'grommet';
+import { Anchor, Box, Grid, InfiniteScroll } from 'grommet';
 import { Erase } from 'grommet-icons';
 
-const getNotePreview = note => note.content && note.content.slice(0, 20) || 'New note'
+const getNotePreview = note => (note.content && note.content.slice(0, 20)) || 'New note'
 
 const NoteListItem = ({note, onClick, onClickDelete}) => (
     <Box
