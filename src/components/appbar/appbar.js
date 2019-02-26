@@ -2,7 +2,7 @@ import React from 'react';
 import { Box, Button, Grid } from 'grommet';
 import { Add } from 'grommet-icons';
 
-export const AppBar = () => (
+export const AppBar = ({onClickAdd}) => (
     <Grid
         areas={[
             { name: 'nav', start: [0, 0], end: [1, 0] },
@@ -10,8 +10,12 @@ export const AppBar = () => (
         rows={['xxsmall']}
         columns={['full']}
       >
-        <Box gridArea='nav' justify="end">
-          <Button icon={<Add/>} fill={false} alignSelf="end"/>
+        <Box gridArea='nav'>
+          <Button 
+            alignSelf="end"
+            fill={false}
+            icon={<Add/>} 
+            onClick={onClickAdd}/>
         </Box>
       </Grid>
 )
