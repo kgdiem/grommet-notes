@@ -3,6 +3,6 @@ import { Box, TextArea } from 'grommet';
 
 export default ({note}) => (
     <Box fill={true} background="light-1">
-        <TextArea fill={true} value={note.content}/>
+        <TextArea fill={true} value={note && note.content}/>
     </Box>
 )

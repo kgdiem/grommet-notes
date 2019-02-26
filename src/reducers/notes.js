@@ -5,7 +5,7 @@ export const initialState = {
     activeNoteIndex: null
 }
 
-export function notes(state = initialState, action) {
+function notes(state = initialState, action) {
     switch (action.type) {
         case actions.ACTIVATE_NOTE:
             return {...state, activeNoteIndex: action.payload.noteIndex}
@@ -20,4 +20,6 @@ export function notes(state = initialState, action) {
         default:
             return state
     }
-  }
+}
+
+export default notes
