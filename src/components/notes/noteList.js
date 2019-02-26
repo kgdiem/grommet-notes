@@ -11,7 +11,7 @@ const NoteListItem = ({note, onClick}) => (
     </Box>
 )
 
-export default ({notes, onNoteClick}) => (
+export const NoteList = ({notes, onNoteClick}) => (
     <Box
         background="light-3"
         fill={true}

@@ -1,10 +1,12 @@
 import React from 'react';
 import { Grommet } from 'grommet';
-import { NoteContainer } from './components';
 
-const App = ({notes, note}) => (
+import { NoteContainer, AppBarContainer } from './components';
+
+const App = () => (
   <Grommet>
-      <NoteContainer notes={notes} note={note}/>
+      <AppBarContainer/>
+      <NoteContainer/>
   </Grommet>
 )
 

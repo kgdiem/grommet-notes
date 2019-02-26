@@ -2,10 +2,10 @@ import React from 'react';
 import { Box, Grid } from 'grommet';
 import { connect } from 'react-redux';
 
-import * as actions from '../actions';
+import * as actions from '../../actions';
 import { NoteArea, NoteList } from './';
 
-const NoteContainer = ({notes, note, activateNote, editNote}) => (
+const NoteContainerComponent = ({notes, note, activateNote, editNote}) => (
     <Grid
         areas={[
             { name: 'list', start: [0, 0], end: [1, 0] },
@@ -44,4 +44,4 @@ const mapDispatchToProps = dispatch => ({
     }
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(NoteContainer)
+export const NoteContainer = connect(mapStateToProps, mapDispatchToProps)(NoteContainerComponent)
