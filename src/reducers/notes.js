@@ -6,7 +6,7 @@ if(loadedNotes)
     loadedNotes = JSON.parse(loadedNotes);
 
 export const initialState = {
-    notes: loadedNotes || [{content: 'test', id: 1}],
+    notes: loadedNotes || [],
     activeNoteIndex: 0
 }
 
@@ -15,9 +15,9 @@ function notes(state = initialState, action) {
         case actions.ADD_NOTE: {
             const id = state.notes.length
 
-            const notes = [...state.notes, {id, content: ' '}]
+            const notes = [{id}, ...state.notes]
 
-            return {...state, notes, activeNoteIndex: id}
+            return {...state, notes, activeNoteIndex: 0}
         }
         case actions.ACTIVATE_NOTE: {
             return {...state, activeNoteIndex: action.payload.noteIndex}

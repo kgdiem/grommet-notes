@@ -7,7 +7,7 @@ const NoteListItem = ({note, onClick}) => (
         pad="medium"
         onClick={() => onClick()}
     >
-        <Paragraph margin="none">{note.content}</Paragraph>
+        <Paragraph margin="none">{note.content && note.content.slice(0, 20) || 'New note'}</Paragraph>
     </Box>
 )
 

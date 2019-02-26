@@ -17,8 +17,8 @@ const NoteContainerComponent = ({notes, note, activateNote, editNote}) => (
         gap="small"
         justify="center"
         style={{
-            height: '100vh',
-            width: '98.8vw'
+            height: 'calc(100vh -  48px)',
+            width: '99.1vw'
         }}
     >
         <Box gridArea="list" fill={true}>
