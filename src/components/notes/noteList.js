@@ -8,10 +8,10 @@ const NoteListItem = ({note, onClick, onClickDelete}) => (
     <Box
         alignContent="start"
         flex={false}
-        pad="medium"
+        pad="small"
     >
         <Grid
-            rows={['xsmall']}
+            rows={['xxsmall']}
             columns={['small', 'xxsmall']}
             areas={[
                 { name: 'preview', start: [0, 0], end: [0, 0] },
