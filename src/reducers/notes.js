@@ -13,7 +13,7 @@ export const initialState = {
 function notes(state = initialState, action) {
     switch (action.type) {
         case actions.ADD_NOTE: {
-            const id = state.notes.length
+            const id = state.notes.length + 1
 
             const notes = [{id}, ...state.notes]
 
