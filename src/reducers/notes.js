@@ -10,7 +10,7 @@ export const initialState = {
     activeNoteIndex: 0
 }
 
-function notes(state = initialState, action) {
+export const notes = (state = initialState, action) => {
     switch (action.type) {
         case actions.ADD_NOTE: {
             const id = state.notes.length + 1
@@ -42,14 +42,23 @@ function notes(state = initialState, action) {
         }
         case actions.EDIT_REQUESTED: {
             const notes = [...state.notes]
+            const {activeNoteIndex} = state
 
-            notes[state.activeNoteIndex].content = action.payload.note
+            if(activeNoteIndex === 0) {
+                notes[activeNoteIndex].content = action.payload.note
+
+                return {...state, notes}
+            }
             
-            return {...state, notes: notes}
+            const note = notes.splice(activeNoteIndex, 1)[0]
+
+            note.content = action.payload.note
+
+            notes.unshift(note)
+
+            return {...state, notes, activeNoteIndex: 0}
         }
         default:
             return state
     }
 }
-
-export default notes
