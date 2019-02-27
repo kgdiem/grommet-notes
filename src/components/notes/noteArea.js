@@ -10,6 +10,7 @@ export const NoteArea = ({note, onChange, visible}) => (
                 value={note && note.content ? note.content : ''} 
                 onChange={e => onChange(e.target.value)}
                 style={{
+                    height: '100vh',
                     borderRadius: 0,
                     border: 'none',
                     overflow: 'auto',
