@@ -1,36 +1,40 @@
 import React from 'react';
-import { Box, Collapsible, Grid, ResponsiveContext } from 'grommet';
+import { Box, Collapsible, Grid, ResponsiveContext, ThemeContext } from 'grommet';
 import { connect } from 'react-redux';
 
 import * as actions from '../../actions';
 import { NoteArea, NoteList } from './';
 
+const defaultGridSize = {
+    rows: ['full']
+}
+
 const getGridSize = (size, activeNote) => {
     if(size !== 'small') {
         return {
+            ...defaultGridSize,
             areas: [
                 { name: 'list', start: [0, 0], end: [1, 0] },
                 { name: 'note', start: [1, 0], end: [1, 0] },
             ],
-            rows: ['full'],
             columns: ['1/4', '3/4']
         }
     } else if(activeNote) {
         return {
+            ...defaultGridSize,
             areas: [
                 { name: 'list', start: [0, 0], end: [0, 0] },
                 { name: 'note', start: [0, 0], end: [1, 0] },
             ],
-            rows: ['full'],
             columns: ['auto', 'full']
         }
     } else {
         return {
+            ...defaultGridSize,
             areas: [
                 { name: 'list', start: [0, 0], end: [1, 0] },
                 { name: 'note', start: [0, 0], end: [0, 0] },
             ],
-            rows: ['full'],
             columns: ['full', 'auto']
         }
     }
@@ -39,22 +43,19 @@ const getGridSize = (size, activeNote) => {
 const NoteContainerBody = ({activeNote, activateNote, deleteNote, editNote, notes, note, size}) => (
     <Grid
         {...getGridSize(size, activeNote)}
-        fill={true}
+        fill
+        flex
         gap="small"
         justify="center"
-        style={{
-            height: 'calc(100vh -  48px)',
-            width: '99.1vw'
-        }}
     >
         <Collapsible direction="horizontal" open={size !== 'small' || !activeNote}>
-            <Box gridArea="list" fill={true}>
+            <Box gridArea="list" fill flex>
                 <NoteList notes={notes} onNoteClick={activateNote} onDeleteNoteClick={deleteNote}/>
             </Box>
         </Collapsible>
 
         <Collapsible direction="horizontal" open={size !== 'small' || activeNote}>
-            <Box gridArea="note" fill={true}>
+            <Box gridArea="note" fill flex>
                 <NoteArea note={note} onChange={note && editNote}/>
             </Box>
         </Collapsible>

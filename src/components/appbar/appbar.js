@@ -20,7 +20,7 @@ export const AppBar = ({activeNote, onAddClick, onCloseClick, size}) => (
           />
         }
 
-        { size === 'small' && !activeNote && 
+        { (size !== 'small' || !activeNote) && 
           <Button 
             alignSelf="end"
             fill={false}

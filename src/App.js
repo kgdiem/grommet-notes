@@ -3,8 +3,16 @@ import { Grommet } from 'grommet';
 
 import { NoteContainer, AppBarContainer } from './components';
 
+const theme = {
+  collapsible: {
+    animatedBox: {
+      width: "100%"
+    }
+  }
+}
+
 const App = () => (
-  <Grommet>
+  <Grommet theme={theme} full>
       <AppBarContainer/>
       <NoteContainer/>
   </Grommet>

@@ -36,7 +36,8 @@ const NoteListItem = ({note, onClick, onClickDelete}) => (
 export const NoteList = ({notes, onNoteClick, onDeleteNoteClick}) => (
     <Box
         background="light-3"
-        fill={true}
+        fill
+        flex
         overflow="auto"
     >
         {notes.map((note, index) => (
