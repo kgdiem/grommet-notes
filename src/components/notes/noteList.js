@@ -8,11 +8,12 @@ const NoteListItem = ({note, onClick, onClickDelete}) => (
     <Box
         alignContent="start"
         flex={false}
+        fill
         pad="small"
     >
         <Grid
             rows={['xxsmall']}
-            columns={['small', 'xxsmall']}
+            columns={['small', 'xsmall']}
             areas={[
                 { name: 'preview', start: [0, 0], end: [0, 0] },
                 { name: 'actions', start: [1,0], end: [1, 0]}
@@ -25,7 +26,7 @@ const NoteListItem = ({note, onClick, onClickDelete}) => (
             </Box>
 
             <Box gridArea="actions">
-                <Anchor onClick={onClickDelete}>
+                <Anchor onClick={onClickDelete} alignSelf="end">
                     <Erase/>
                 </Anchor>
             </Box>
