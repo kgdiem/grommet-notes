@@ -26,7 +26,7 @@ const mobileGrid = {
 
 const getGridSize = (size, activeNote) => {
     if(size !== 'small') {
-        return 
+        return regularGrid
     } else {
         const grid = {...mobileGrid}
 
