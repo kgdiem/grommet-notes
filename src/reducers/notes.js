@@ -7,7 +7,7 @@ if(loadedNotes)
 
 export const initialState = {
     notes: loadedNotes || [],
-    activeNoteIndex: 0
+    activeNoteIndex: undefined
 }
 
 export const notes = (state = initialState, action) => {
@@ -32,6 +32,9 @@ export const notes = (state = initialState, action) => {
             notes.unshift(note)
             
             return {...state, notes, activeNoteIndex: 0}
+        }
+        case actions.CLEAR_ACTIVE_NOTE: {
+            return {...state, activeNoteIndex: undefined}
         }
         case actions.DELETE_NOTE: {
             const activeNoteIndex = state.activeNoteIndex

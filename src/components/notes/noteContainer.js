@@ -1,18 +1,24 @@
 import React from 'react';
-import { Box, Grid } from 'grommet';
+import { Box, Collapsible, Grid, ResponsiveContext } from 'grommet';
 import { connect } from 'react-redux';
 
 import * as actions from '../../actions';
 import { NoteArea, NoteList } from './';
 
-const NoteContainerComponent = ({notes, note, activateNote, deleteNote, editNote}) => (
-    <Grid
-        areas={[
+const getGridSize = size => {
+    return {
+        areas: [
             { name: 'list', start: [0, 0], end: [1, 0] },
             { name: 'note', start: [1, 0], end: [1, 0] },
-        ]}
-        rows={['full']}
-        columns={['1/4', '3/4']}
+        ],
+        rows: ['full'],
+        columns: ['1/4', '3/4']
+    }
+}
+
+const NoteContainerBody = ({activeNote, activateNote, deleteNote, editNote, notes, note, size}) => (
+    <Grid
+        {...getGridSize(size)}
         fill={true}
         gap="small"
         justify="center"
@@ -21,18 +27,30 @@ const NoteContainerComponent = ({notes, note, activateNote, deleteNote, editNote
             width: '99.1vw'
         }}
     >
-        <Box gridArea="list" fill={true}>
-            <NoteList notes={notes} onNoteClick={activateNote} onDeleteNoteClick={deleteNote}/>
-        </Box>
-        <Box gridArea="note" fill={true}>
-            <NoteArea note={note} onChange={note && editNote}/>
-        </Box>
+        <Collapsible direction="horizontal" open={size !== 'small' || !activeNote}>
+            <Box gridArea="list" fill={true}>
+                <NoteList notes={notes} onNoteClick={activateNote} onDeleteNoteClick={deleteNote}/>
+            </Box>
+        </Collapsible>
+
+        <Collapsible direction="horizontal" open={size !== 'small' || activeNote}>
+            <Box gridArea="note" fill={true}>
+                <NoteArea note={note} onChange={note && editNote}/>
+            </Box>
+        </Collapsible>
     </Grid>
+)
+
+const NoteContainerComponent = (props) => (
+    <ResponsiveContext.Consumer>
+        {size => <NoteContainerBody size={size} {...props}/>}
+    </ResponsiveContext.Consumer>
 )
 
 const mapStateToProps = state => ({
     notes: state.notes,
-    note: state.notes[state.activeNoteIndex]
+    note: state.notes[state.activeNoteIndex || 0],
+    activeNote: state.activeNoteIndex !== undefined
 })
 
 const mapDispatchToProps = dispatch => ({
