@@ -48,7 +48,7 @@ export const NoteList = ({notes, onNoteClick, onDeleteNoteClick, visible}) => (
                         note={note}
                         onClick={() => onNoteClick(index)}
                         onClickDelete={() => onDeleteNoteClick(index)}
-                        key={note.id} 
+                        key={index} 
                     />
                 )}
             </InfiniteScroll>
