@@ -1,5 +1,5 @@
 import React from 'react';
-import { Anchor, Box, Grid, InfiniteScroll } from 'grommet';
+import { Anchor, Box, Grid, InfiniteScroll, Collapsible } from 'grommet';
 import { Erase } from 'grommet-icons';
 
 const getNotePreview = note => (note.content && note.content.slice(0, 20)) || 'New note'
@@ -33,20 +33,24 @@ const NoteListItem = ({note, onClick, onClickDelete}) => (
     </Box>
 )
 
-export const NoteList = ({notes, onNoteClick, onDeleteNoteClick}) => (
+export const NoteList = ({notes, onNoteClick, onDeleteNoteClick, visible}) => (
     <Box
         background="light-3"
         fill
         flex
         overflow="auto"
     >
-        {notes.map((note, index) => (
-            <NoteListItem 
-                note={note}
-                onClick={() => onNoteClick(index)}
-                onClickDelete={() => onDeleteNoteClick(index)}
-                key={index} 
-            />
-        ))}
+        <Collapsible open={visible}>
+            <InfiniteScroll items={notes}>
+                {(note, index) => (
+                    <NoteListItem 
+                        note={note}
+                        onClick={() => onNoteClick(index)}
+                        onClickDelete={() => onDeleteNoteClick(index)}
+                        key={note.id} 
+                    />
+                )}
+            </InfiniteScroll>
+        </Collapsible>
     </Box>
 )

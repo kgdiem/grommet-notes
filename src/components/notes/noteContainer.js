@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Collapsible, Grid, ResponsiveContext, ThemeContext } from 'grommet';
+import { Box, Grid, ResponsiveContext } from 'grommet';
 import { connect } from 'react-redux';
 
 import * as actions from '../../actions';
@@ -45,20 +45,25 @@ const NoteContainerBody = ({activeNote, activateNote, deleteNote, editNote, note
         {...getGridSize(size, activeNote)}
         fill
         flex
-        gap="small"
         justify="center"
     >
-        <Collapsible direction="horizontal" open={size !== 'small' || !activeNote}>
-            <Box gridArea="list" fill flex>
-                <NoteList notes={notes} onNoteClick={activateNote} onDeleteNoteClick={deleteNote}/>
-            </Box>
-        </Collapsible>
+        
+        <Box gridArea="list" fill flex>
+            <NoteList 
+                notes={notes} 
+                onNoteClick={activateNote} 
+                onDeleteNoteClick={deleteNote} 
+                visible={size !== 'small' || !activeNote}
+            />
+        </Box>
 
-        <Collapsible direction="horizontal" open={size !== 'small' || activeNote}>
-            <Box gridArea="note" fill flex>
-                <NoteArea note={note} onChange={note && editNote}/>
-            </Box>
-        </Collapsible>
+        <Box gridArea="note" fill flex>
+            <NoteArea 
+                note={note} 
+                onChange={note && editNote} 
+                visible={size !== 'small' || activeNote}
+            />
+        </Box>
     </Grid>
 )
 
