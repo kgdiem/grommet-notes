@@ -1,6 +1,10 @@
 ## Grommet Notes
 Simple notes app to test out [Grommet](https://v2.grommet.io)
 
+![](screenshots/notes-full.gif)
+
+![](screenshots/notes.gif)
+
 ## Available Scripts
 
 In the project directory, you can run:
