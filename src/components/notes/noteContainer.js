@@ -5,20 +5,40 @@ import { connect } from 'react-redux';
 import * as actions from '../../actions';
 import { NoteArea, NoteList } from './';
 
-const getGridSize = size => {
-    return {
-        areas: [
-            { name: 'list', start: [0, 0], end: [1, 0] },
-            { name: 'note', start: [1, 0], end: [1, 0] },
-        ],
-        rows: ['full'],
-        columns: ['1/4', '3/4']
+const getGridSize = (size, activeNote) => {
+    if(size !== 'small') {
+        return {
+            areas: [
+                { name: 'list', start: [0, 0], end: [1, 0] },
+                { name: 'note', start: [1, 0], end: [1, 0] },
+            ],
+            rows: ['full'],
+            columns: ['1/4', '3/4']
+        }
+    } else if(activeNote) {
+        return {
+            areas: [
+                { name: 'list', start: [0, 0], end: [0, 0] },
+                { name: 'note', start: [0, 0], end: [1, 0] },
+            ],
+            rows: ['full'],
+            columns: ['auto', 'full']
+        }
+    } else {
+        return {
+            areas: [
+                { name: 'list', start: [0, 0], end: [1, 0] },
+                { name: 'note', start: [0, 0], end: [0, 0] },
+            ],
+            rows: ['full'],
+            columns: ['full', 'auto']
+        }
     }
 }
 
 const NoteContainerBody = ({activeNote, activateNote, deleteNote, editNote, notes, note, size}) => (
     <Grid
-        {...getGridSize(size)}
+        {...getGridSize(size, activeNote)}
         fill={true}
         gap="small"
         justify="center"
