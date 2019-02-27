@@ -39,15 +39,13 @@ export const NoteList = ({notes, onNoteClick, onDeleteNoteClick}) => (
         fill={true}
         overflow="auto"
     >
-        <InfiniteScroll items={notes}>
-            {(note, index) => (
-                <NoteListItem 
-                    note={note}
-                    onClick={() => onNoteClick(index)}
-                    onClickDelete={() => onDeleteNoteClick(index)}
-                    key={note.id} 
-                />
-            )}
-        </InfiniteScroll>
+        {notes.map((note, index) => (
+            <NoteListItem 
+                note={note}
+                onClick={() => onNoteClick(index)}
+                onClickDelete={() => onDeleteNoteClick(index)}
+                key={index} 
+            />
+        ))}
     </Box>
 )
