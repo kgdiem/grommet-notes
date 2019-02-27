@@ -7,7 +7,7 @@ if(loadedNotes)
 
 export const initialState = {
     notes: loadedNotes || [],
-    activeNoteIndex: undefined
+    activeNoteIndex: null
 }
 
 export const notes = (state = initialState, action) => {
@@ -34,7 +34,7 @@ export const notes = (state = initialState, action) => {
             return {...state, notes, activeNoteIndex: 0}
         }
         case actions.CLEAR_ACTIVE_NOTE: {
-            return {...state, activeNoteIndex: undefined}
+            return {...state, activeNoteIndex: null}
         }
         case actions.DELETE_NOTE: {
             const activeNoteIndex = state.activeNoteIndex

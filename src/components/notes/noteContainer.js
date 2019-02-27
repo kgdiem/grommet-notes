@@ -76,7 +76,7 @@ const NoteContainerComponent = (props) => (
 const mapStateToProps = state => ({
     notes: state.notes,
     note: state.notes[state.activeNoteIndex || 0],
-    activeNote: state.activeNoteIndex !== undefined
+    activeNote: state.activeNoteIndex !== null
 })
 
 const mapDispatchToProps = dispatch => ({

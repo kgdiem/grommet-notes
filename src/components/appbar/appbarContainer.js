@@ -19,7 +19,7 @@ const AppBarContainerComponent = ({addNote, activeNote, closeNote}) => (
 )
 
 const mapStateToProps = state => ({
-    activeNote: state.activeNoteIndex !== undefined
+    activeNote: state.activeNoteIndex !== null
 })
 
 const mapDispatchToProps = dispatch => ({
