@@ -20,7 +20,13 @@ export const notes = (state = initialState, action) => {
             return {...state, notes, activeNoteIndex: 0}
         }
         case actions.ACTIVATE_NOTE: {
-            return {...state, activeNoteIndex: action.payload.noteIndex}
+            const notes = [...state.notes]
+
+            const note = notes.splice(action.payload.noteIndex, 1)[0]
+
+            notes.unshift(note)
+            
+            return {...state, notes, activeNoteIndex: 0}
         }
         case actions.DELETE_NOTE: {
             const activeNoteIndex = state.activeNoteIndex
@@ -42,21 +48,10 @@ export const notes = (state = initialState, action) => {
         }
         case actions.EDIT_REQUESTED: {
             const notes = [...state.notes]
-            const {activeNoteIndex} = state
 
-            if(activeNoteIndex === 0) {
-                notes[activeNoteIndex].content = action.payload.note
+            notes[0].content = action.payload.note
 
-                return {...state, notes}
-            }
-            
-            const note = notes.splice(activeNoteIndex, 1)[0]
-
-            note.content = action.payload.note
-
-            notes.unshift(note)
-
-            return {...state, notes, activeNoteIndex: 0}
+            return {...state, notes}
         }
         default:
             return state

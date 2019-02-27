@@ -9,9 +9,10 @@ function* editRequested() {
 }
 
 export const noteSagas = [
+    takeEvery(actions.ADD_NOTE, editRequested),
+    takeEvery(actions.ACTIVATE_NOTE, editRequested),
     takeLatest(actions.EDIT_REQUESTED, editRequested),
-    takeEvery(actions.DELETE_NOTE, editRequested),
-    takeEvery(actions.ADD_NOTE, editRequested)
+    takeEvery(actions.DELETE_NOTE, editRequested)
 ]
 
 export function* noteSaga() {
