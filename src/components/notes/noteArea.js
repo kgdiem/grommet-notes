@@ -14,10 +14,10 @@ export const NoteArea = ({note, onChange, visible}) => (
                     border: 'none',
                     overflow: 'auto',
                     outline: 'none',
-                    '-webkit-box-shadow': 'none',
-                    '-moz-box-shadow': 'none',
-                    'box-shadow': 'none',
-                    'resize': 'none',
+                    WebkitBoxShadow: 'none',
+                    MozBoxShadow: 'none',
+                    boxShadow: 'none',
+                    resize: 'none',
                 }}
             />
         </Collapsible>
