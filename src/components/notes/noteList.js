@@ -11,26 +11,19 @@ const NoteListItem = ({note, onClick, onClickDelete}) => (
         fill
         pad="small"
     >
-        <Grid
-            rows={['xxsmall']}
-            columns={['small', 'xsmall']}
-            areas={[
-                { name: 'preview', start: [0, 0], end: [0, 0] },
-                { name: 'actions', start: [1,0], end: [1, 0]}
-            ]}
-        >
-            <Box gridArea="preview">
+        <Box direction="row">
+            <Box>
                 <Anchor onClick={onClick}>
                     {getNotePreview(note)}
                 </Anchor>
             </Box>
 
-            <Box gridArea="actions">
+            <Box flex>
                 <Anchor onClick={onClickDelete} alignSelf="end">
                     <Erase/>
                 </Anchor>
             </Box>
-        </Grid>
+        </Box>
     </Box>
 )
 
