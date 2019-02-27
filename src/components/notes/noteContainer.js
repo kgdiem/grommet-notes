@@ -5,38 +5,34 @@ import { connect } from 'react-redux';
 import * as actions from '../../actions';
 import { NoteArea, NoteList } from './';
 
-const defaultGridSize = {
-    rows: ['full']
+const full = ['full']
+
+const regularGrid = {
+    areas: [
+        { name: 'list', start: [0, 0], end: [1, 0] },
+        { name: 'note', start: [1, 0], end: [1, 0] },
+    ],
+    columns: ['1/4', '3/4'],
+    rows: full
+}
+
+const mobileGrid = {
+    areas: [
+        { start: [0, 0], end: [1, 0] },
+    ],
+    columns: full,
+    rows: full
 }
 
 const getGridSize = (size, activeNote) => {
     if(size !== 'small') {
-        return {
-            ...defaultGridSize,
-            areas: [
-                { name: 'list', start: [0, 0], end: [1, 0] },
-                { name: 'note', start: [1, 0], end: [1, 0] },
-            ],
-            columns: ['1/4', '3/4']
-        }
-    } else if(activeNote) {
-        return {
-            ...defaultGridSize,
-            areas: [
-                { name: 'list', start: [0, 0], end: [0, 0] },
-                { name: 'note', start: [0, 0], end: [1, 0] },
-            ],
-            columns: ['auto', 'full']
-        }
+        return 
     } else {
-        return {
-            ...defaultGridSize,
-            areas: [
-                { name: 'list', start: [0, 0], end: [1, 0] },
-                { name: 'note', start: [0, 0], end: [0, 0] },
-            ],
-            columns: ['full', 'auto']
-        }
+        const grid = {...mobileGrid}
+
+        grid.areas[0].name = activeNote ? 'note' : 'list'
+
+        return grid
     }
 }
 
