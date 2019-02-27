@@ -20,6 +20,11 @@ export const notes = (state = initialState, action) => {
             return {...state, notes, activeNoteIndex: 0}
         }
         case actions.ACTIVATE_NOTE: {
+            const activeNoteIndex = action.payload.noteIndex
+
+            if(activeNoteIndex === state.activeNoteIndex)
+                return state
+                
             const notes = [...state.notes]
 
             const note = notes.splice(action.payload.noteIndex, 1)[0]
